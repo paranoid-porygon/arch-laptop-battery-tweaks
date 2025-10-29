@@ -16,7 +16,7 @@
 sudo pacman -S fwupd flashrom linux-firmware git wget vim
 # there's a bug with the current fwupd package so use 2.0.13-1 instead
 sudo rm /var/lib/fwupd/pending.db
-sudo pacman -U https://archive.archlinux.org/packages/f/fwupd/fwupd-2.0.13-1-x86_86.pkg.tar.zst
+sudo pacman -U https://archive.archlinux.org/packages/f/fwupd/fwupd-2.0.13-1-x86_64.pkg.tar.zst
 fwupdmgr refresh
 fwupdmgr update
 
@@ -35,8 +35,8 @@ sudo touch /etc/iwd/main.conf
 sudo vimdiff ./etc/iwd/main.conf /etc/iwd/main.conf
 
 # set iwlwifi module options
-sudo touch /etc/modprob.d/iwlwifi.conf
-sudo vimdiff ./etc/modprob.d/iwlwifi.conf /etc/modprob.d/iwlwifi.conf
+sudo touch /etc/modprobe.d/iwlwifi.conf
+sudo vimdiff ./etc/modprobe.d/iwlwifi.conf /etc/modprobe.d/iwlwifi.conf
 
 # disable wake on lan
 #sudo vim /etc/udev/rules.d/81-wifi-powersave.rules
@@ -73,6 +73,11 @@ sudo vimdiff ./etc/default/grub /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # install and enable auto-cpufreq from the AUR
+cd /tmp/
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
 yay -S auto-cpufreq
 # manually create config
 #vim ~/.config/auto-cpufreq/auto-cpufreq.conf
